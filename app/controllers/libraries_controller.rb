@@ -14,20 +14,21 @@ class LibrariesController < ApplicationController
 
   # GET /libraries/new
   def new
-    @library = Library.new
-    @library.books.build
+    @library = Library.new 
+    @library.books.build   
   end
 
   # GET /libraries/1/edit
   def edit
-    @library.books.build
+     @library.books.build   
   end
 
   # POST /libraries
   # POST /libraries.json
   def create
     @library = Library.new(library_params)
-
+    puts "ESTO ES LA IMPRESION"
+    puts library_params
     respond_to do |format|
       if @library.save
         format.html { redirect_to @library, notice: 'Library was successfully created.' }
@@ -71,6 +72,7 @@ class LibrariesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def library_params
-      params.require(:library).permit(:name, book_attributes:[:id, :name, :_destroy])
+      #params.require(:library).permit(:name, books_attributes:[:library_id, :id, :name, :_destroy])
+      params.require(:library).permit(:name,books_attributes: Book.attribute_names.map(&:to_sym).push(:_destroy))
     end
 end
