@@ -1,0 +1,16 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @library.name %>
+</p>
+
+<p>
+  <h5>Books:</h5> <%# in this way will show the elements  as a list (<li> marking each 	element with dots) %> 	  
+  <% for book in @library.books %>
+  	<li><%=h book.name %></li>
+  <% end %>
+</p>
+
+<%= link_to 'Edit', edit_library_path(@library) %> |
+<%= link_to 'Back', libraries_path %>
